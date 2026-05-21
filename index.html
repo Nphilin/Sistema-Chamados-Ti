@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema de Chamados TI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Central de Chamados TI</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html"><strong>Dashboard</strong></a></li>
+                <li><a href="novo-chamado.html">Novo Chamado</a></li>
+                <li><a href="chamados.html">Lista de Chamados</a></li>
+                <li><a href="etapas.html">Etapas do Projeto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Resumo Geral dos Chamados</h2>
+        <div class="dashboard-grid">
+            <div class="card total">
+                <h3>Total de Chamados</h3>
+                <p id="total-chamados">0</p>
+            </div>
+            <div class="card aberto">
+                <h3>Abertos</h3>
+                <p id="abertos-chamados">0</p>
+            </div>
+            <div class="card andamento">
+                <h3>Em Andamento</h3>
+                <p id="andamento-chamados">0</p>
+            </div>
+            <div class="card concluido">
+                <h3>Concluídos</h3>
+                <p id="concluidos-chamados">0</p>
+            </div>
+        </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+
+</html>

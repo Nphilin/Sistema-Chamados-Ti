@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Chamado - Sistema de Chamados TI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Central de Chamados TI</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="novo-chamado.html"><strong>Novo Chamado</strong></a></li>
+                <li><a href="chamados.html">Lista de Chamados</a></li>
+                <li><a href="etapas.html">Etapas do Projeto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2 id="form-title">Cadastrar Novo Chamado</h2>
+        <form id="form-chamado"
+            style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+            <input type="hidden" id="chamado-id">
+
+            <div class="form-group">
+                <label for="titulo">Título do Chamado</label>
+                <input type="text" id="titulo" class="form-control" placeholder="Ex: Erro ao acessar o sistema"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="prioridade">Prioridade</label>
+                <select id="prioridade" class="form-control">
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média">Média</option>
+                    <option value="Alta">Alta</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status Inicial</label>
+                <select id="status" class="form-control">
+                    <option value="Aberto">Aberto</option>
+                    <option value="Em Andamento">Em Andamento</option>
+                    <option value="Concluído">Concluído</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="descricao">Descrição do Problema</label>
+                <textarea id="descricao" class="form-control" rows="5"
+                    placeholder="Descreva os detalhes da solicitação..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn">Salvar Chamado</button>
+        </form>
+    </main>
+    <script src="app.js"></script>
+</body>
+
+</html>

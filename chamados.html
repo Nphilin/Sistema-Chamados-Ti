@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Chamados - Sistema de Chamados TI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Central de Chamados TI</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="novo-chamado.html">Novo Chamado</a></li>
+                <li><a href="chamados.html"><strong>Lista de Chamados</strong></a></li>
+                <li><a href="etapas.html">Etapas do Projeto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Consulta de Chamados</h2>
+
+        <div class="search-container">
+            <input type="text" id="search-input" class="form-control"
+                placeholder="Pesquisa dinâmica por título ou descrição...">
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Prioridade</th>
+                        <th>Status</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-chamados-body">
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+
+</html>
