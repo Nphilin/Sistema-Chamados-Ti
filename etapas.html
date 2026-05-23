@@ -1,44 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etapas do Projeto - Sistema de Chamados TI</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Etapas - Sistema de Chamados de TI</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-    <header>
-        <h1>Central de Chamados TI</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Dashboard</a></li>
-                <li><a href="novo-chamado.html">Novo Chamado</a></li>
-                <li><a href="chamados.html">Lista de Chamados</a></li>
-                <li><a href="etapas.html"><strong>Etapas do Projeto</strong></a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h2>Descrição das Etapas do Sistema</h2>
-        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-            <p style="margin-bottom: 1rem;">Este projeto simula o ambiente de uma central de atendimento técnico real,
-                validando os requisitos funcionais e não-funcionais solicitados[cite: 5].</p>
-            <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
-                <li><strong>Etapa 1:</strong> Planejamento da arquitetura de páginas e definição de escopo (RFs e
-                    RNFs)[cite: 14, 20, 24].</li>
-                <li><strong>Etapa 2:</strong> Estruturação semântica das telas utilizando HTML5 puro.</li>
-                <li><strong>Etapa 3:</strong> Estilização visual moderna e responsiva com foco na usabilidade em
-                    dispositivos móveis utilizando CSS3[cite: 3, 11, 25].</li>
-                <li><strong>Etapa 4:</strong> Implementação da lógica de controle (CRUD) e tratamento dos filtros
-                    dinâmicos de pesquisa com JavaScript Vanilla[cite: 5, 18, 21, 22].</li>
-                <li><strong>Etapa 5:</strong> Integração com persistência persistente sem necessidade de banco de dados
-                    relacional via API Web LocalStorage[cite: 3, 18, 22].</li>
-            </ul>
-        </div>
-    </main>
-    <script src="app.js"></script>
-</body>
+<header class="topbar">
+  <div class="header-content">
+    <div class="brand">
+      <h1>Sistema de Chamados de TI</h1>
+      <p>Projeto acadêmico front-end</p>
+    </div>
+    <nav class="menu">
+      <a href="index.html" class="">Dashboard</a>
+      <a href="novo-chamado.html" class="">Novo Chamado</a>
+      <a href="chamados.html" class="">Lista de Chamados</a>
+      <a href="etapas.html" class="active">Etapas</a>
+      <span id="usuarioLogado" class="user-info"></span>
+      <a href="#" id="btnSair" class="btn-logout">Sair</a>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <section class="hero">
+    <h2>Etapas do Projeto</h2>
+    <p>Cada tópico foi separado em uma página para facilitar a apresentação da atividade.</p>
+  </section>
 
+  <section class="steps">
+    <article class="step">
+      <h3>1. Tela de Login</h3>
+      <p>Permite autenticação de usuários, cadastro de novos acessos e proteção das páginas internas.</p>
+    </article>
+
+    <article class="step">
+      <h3>2. Dashboard</h3>
+      <p>Exibe indicadores com total de chamados, chamados abertos, em andamento e finalizados.</p>
+    </article>
+
+    <article class="step">
+      <h3>3. Cadastro de Chamados</h3>
+      <p>Permite registrar chamados com solicitante, setor, tipo do problema, prioridade, status e descrição.</p>
+    </article>
+
+    <article class="step">
+      <h3>4. Lista de Chamados</h3>
+      <p>Permite consultar, pesquisar, editar e excluir chamados cadastrados.</p>
+    </article>
+
+    <article class="step">
+      <h3>5. Armazenamento Local</h3>
+      <p>O sistema utiliza LocalStorage para salvar usuários, sessão de login e chamados no navegador.</p>
+    </article>
+  </section>
+</main>
+<footer class="footer">
+  <p>Desenvolvido com HTML, CSS, JavaScript e LocalStorage.</p>
+</footer>
+<div id="toast" class="toast"></div>
+<script src="js/script.js"></script>
+</body>
 </html>

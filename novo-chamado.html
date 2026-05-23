@@ -1,65 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Chamado - Sistema de Chamados TI</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Novo Chamado - Sistema de Chamados de TI</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-    <header>
-        <h1>Central de Chamados TI</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Dashboard</a></li>
-                <li><a href="novo-chamado.html"><strong>Novo Chamado</strong></a></li>
-                <li><a href="chamados.html">Lista de Chamados</a></li>
-                <li><a href="etapas.html">Etapas do Projeto</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h2 id="form-title">Cadastrar Novo Chamado</h2>
-        <form id="form-chamado"
-            style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-            <input type="hidden" id="chamado-id">
+<header class="topbar">
+  <div class="header-content">
+    <div class="brand">
+      <h1>Sistema de Chamados de TI</h1>
+      <p>Projeto acadêmico front-end</p>
+    </div>
+    <nav class="menu">
+      <a href="index.html" class="">Dashboard</a>
+      <a href="novo-chamado.html" class="active">Novo Chamado</a>
+      <a href="chamados.html" class="">Lista de Chamados</a>
+      <a href="etapas.html" class="">Etapas</a>
+      <span id="usuarioLogado" class="user-info"></span>
+      <a href="#" id="btnSair" class="btn-logout">Sair</a>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <section class="hero">
+    <h2 id="tituloFormulario">Novo Chamado</h2>
+    <p>Preencha os dados abaixo para registrar uma solicitação de suporte técnico.</p>
+  </section>
 
-            <div class="form-group">
-                <label for="titulo">Título do Chamado</label>
-                <input type="text" id="titulo" class="form-control" placeholder="Ex: Erro ao acessar o sistema"
-                    required>
-            </div>
+  <section class="panel">
+    <form id="formChamado">
+      <input type="hidden" id="chamadoId" />
 
-            <div class="form-group">
-                <label for="prioridade">Prioridade</label>
-                <select id="prioridade" class="form-control">
-                    <option value="Baixa">Baixa</option>
-                    <option value="Média">Média</option>
-                    <option value="Alta">Alta</option>
-                </select>
-            </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="solicitante">Solicitante</label>
+          <input id="solicitante" type="text" placeholder="Nome do solicitante" required />
+        </div>
 
-            <div class="form-group">
-                <label for="status">Status Inicial</label>
-                <select id="status" class="form-control">
-                    <option value="Aberto">Aberto</option>
-                    <option value="Em Andamento">Em Andamento</option>
-                    <option value="Concluído">Concluído</option>
-                </select>
-            </div>
+        <div class="form-group">
+          <label for="setor">Setor</label>
+          <input id="setor" type="text" placeholder="Ex: Financeiro, Secretaria, TI" required />
+        </div>
+      </div>
 
-            <div class="form-group">
-                <label for="descricao">Descrição do Problema</label>
-                <textarea id="descricao" class="form-control" rows="5"
-                    placeholder="Descreva os detalhes da solicitação..." required></textarea>
-            </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="tipo">Tipo do problema</label>
+          <select id="tipo" required>
+            <option value="">Selecione</option>
+            <option>Computador</option>
+            <option>Internet</option>
+            <option>Impressora</option>
+            <option>Sistema</option>
+            <option>E-mail</option>
+            <option>Outro</option>
+          </select>
+        </div>
 
-            <button type="submit" class="btn">Salvar Chamado</button>
-        </form>
-    </main>
-    <script src="app.js"></script>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prioridade">Prioridade</label>
+            <select id="prioridade" required>
+              <option>Baixa</option>
+              <option>Média</option>
+              <option>Alta</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" required>
+              <option>Aberto</option>
+              <option>Em andamento</option>
+              <option>Finalizado</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" rows="5" placeholder="Descreva o problema do usuário" required></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" type="submit">Salvar chamado</button>
+        <button class="btn btn-secondary" type="reset">Limpar</button>
+        <a class="btn btn-secondary" href="chamados.html">Ver chamados</a>
+      </div>
+    </form>
+  </section>
+</main>
+<footer class="footer">
+  <p>Desenvolvido com HTML, CSS, JavaScript e LocalStorage.</p>
+</footer>
+<div id="toast" class="toast"></div>
+<script src="js/script.js"></script>
 </body>
-
 </html>

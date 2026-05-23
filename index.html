@@ -1,47 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Sistema de Chamados TI</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Sistema de Chamados de TI</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-    <header>
-        <h1>Central de Chamados TI</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html"><strong>Dashboard</strong></a></li>
-                <li><a href="novo-chamado.html">Novo Chamado</a></li>
-                <li><a href="chamados.html">Lista de Chamados</a></li>
-                <li><a href="etapas.html">Etapas do Projeto</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h2>Resumo Geral dos Chamados</h2>
-        <div class="dashboard-grid">
-            <div class="card total">
-                <h3>Total de Chamados</h3>
-                <p id="total-chamados">0</p>
-            </div>
-            <div class="card aberto">
-                <h3>Abertos</h3>
-                <p id="abertos-chamados">0</p>
-            </div>
-            <div class="card andamento">
-                <h3>Em Andamento</h3>
-                <p id="andamento-chamados">0</p>
-            </div>
-            <div class="card concluido">
-                <h3>Concluídos</h3>
-                <p id="concluidos-chamados">0</p>
-            </div>
-        </div>
-    </main>
-    <script src="app.js"></script>
-</body>
+<header class="topbar">
+  <div class="header-content">
+    <div class="brand">
+      <h1>Sistema de Chamados de TI</h1>
+      <p>Projeto acadêmico front-end</p>
+    </div>
+    <nav class="menu">
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="novo-chamado.html" class="">Novo Chamado</a>
+      <a href="chamados.html" class="">Lista de Chamados</a>
+      <a href="etapas.html" class="">Etapas</a>
+      <span id="usuarioLogado" class="user-info"></span>
+      <a href="#" id="btnSair" class="btn-logout">Sair</a>
+    </nav>
+  </div>
+</header>
+<main class="container">
+  <section class="hero">
+    <h2>Dashboard do Sistema</h2>
+    <p>Visualize o resumo dos chamados cadastrados, acompanhe os atendimentos abertos, em andamento e finalizados.</p>
+  </section>
 
+  <section class="cards">
+    <article class="card"><span>Total de chamados</span><strong id="totalChamados">0</strong></article>
+    <article class="card"><span>Chamados abertos</span><strong id="totalAbertos">0</strong></article>
+    <article class="card"><span>Em andamento</span><strong id="totalAndamento">0</strong></article>
+    <article class="card"><span>Finalizados</span><strong id="totalFinalizados">0</strong></article>
+  </section>
+
+  <section class="grid-2">
+    <div class="panel">
+      <h2>Objetivo</h2>
+      <p>O sistema simula uma central de atendimento de TI para registrar, consultar e controlar chamados técnicos.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Funcionalidades</h2>
+      <p>Login, cadastro de usuários, cadastro de chamados, edição, exclusão, pesquisa, status e prioridades.</p>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <p>Desenvolvido com HTML, CSS, JavaScript e LocalStorage.</p>
+</footer>
+<div id="toast" class="toast"></div>
+<script src="js/script.js"></script>
+</body>
 </html>
