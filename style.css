@@ -243,6 +243,8 @@ th {
     font-size: 0.85rem;
 }
 
+
+
 /* Responsividade */
 @media (max-width: 768px) {
     header {
@@ -254,5 +256,9 @@ th {
     nav ul {
         flex-direction: column;
         gap: 0.5rem;
+    }
+
+    .footer p {
+        font-size: 0.7rem;
     }
 }
