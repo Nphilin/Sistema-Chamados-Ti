@@ -75,7 +75,7 @@ function realizarLogin(event) {
   );
 
   setTimeout(() => {
-    window.location.href = "index.html";
+    window.location.href = "dashboard.html";
   }, 900);
 }
 
@@ -103,7 +103,8 @@ function cadastrarUsuario(event) {
     mostrarAlerta("Esse usuário já existe.", "error");
     return;
   }
-   usuarios.push({ nome, usuario, senha });
+
+  usuarios.push({ nome, usuario, senha });
   salvarUsuarios(usuarios);
 
   document.getElementById("formCadastro").reset();
@@ -124,7 +125,7 @@ function configurarMostrarSenha() {
 obterUsuarios();
 
 const sessao = JSON.parse(localStorage.getItem(SESSION_KEY));
-if (sessao && sessao.logado) window.location.href = "index.html";
+if (sessao && sessao.logado) window.location.href = "dashboard.html";
 
 document.getElementById("tabLogin").addEventListener("click", () => alternarAba("login"));
 document.getElementById("tabCadastro").addEventListener("click", () => alternarAba("cadastro"));

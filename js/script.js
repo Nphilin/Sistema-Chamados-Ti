@@ -4,7 +4,7 @@ const STORAGE_KEY = "chamadosTI";
 function verificarLogin() {
   const sessao = JSON.parse(localStorage.getItem(SESSION_KEY));
   if (!sessao || !sessao.logado) {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
     return;
   }
   const usuarioLogado = document.getElementById("usuarioLogado");
@@ -17,7 +17,7 @@ function configurarLogout() {
     btnSair.addEventListener("click", (event) => {
       event.preventDefault();
       localStorage.removeItem(SESSION_KEY);
-      window.location.href = "login.html";
+      window.location.href = "index.html";
     });
   }
 }
