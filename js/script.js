@@ -3,23 +3,16 @@ const STORAGE_KEY = "chamadosTI";
 
 function verificarLogin() {
   const sessao = JSON.parse(localStorage.getItem(SESSION_KEY));
-
   if (!sessao || !sessao.logado) {
     window.location.href = "login.html";
-    return null;
+    return;
   }
-
   const usuarioLogado = document.getElementById("usuarioLogado");
-  if (usuarioLogado) {
-    usuarioLogado.textContent = `Olá, ${sessao.nome}`;
-  }
-
-  return sessao;
+  if (usuarioLogado) usuarioLogado.textContent = `Olá, ${sessao.nome}`;
 }
 
 function configurarLogout() {
   const btnSair = document.getElementById("btnSair");
-
   if (btnSair) {
     btnSair.addEventListener("click", (event) => {
       event.preventDefault();
@@ -36,28 +29,21 @@ function salvarNoStorage() {
 }
 
 function gerarProtocolo() {
-  const ano = new Date().getFullYear();
-  const numero = Math.floor(Math.random() * 90000) + 10000;
-  return `TI-${ano}-${numero}`;
+  return `SX-${new Date().getFullYear()}-${Math.floor(Math.random() * 90000) + 10000}`;
 }
 
 function mostrarToast(mensagem) {
   const toast = document.getElementById("toast");
   if (!toast) return;
-
   toast.textContent = mensagem;
   toast.style.display = "block";
-
-  setTimeout(() => {
-    toast.style.display = "none";
-  }, 2500);
+  setTimeout(() => (toast.style.display = "none"), 2500);
 }
 
 function atualizarDashboard() {
-  const totalChamados = document.getElementById("totalChamados");
-  if (!totalChamados) return;
-
-  totalChamados.textContent = chamados.length;
+  const total = document.getElementById("totalChamados");
+  if (!total) return;
+  total.textContent = chamados.length;
   document.getElementById("totalAbertos").textContent = chamados.filter(c => c.status === "Aberto").length;
   document.getElementById("totalAndamento").textContent = chamados.filter(c => c.status === "Em andamento").length;
   document.getElementById("totalFinalizados").textContent = chamados.filter(c => c.status === "Finalizado").length;
@@ -84,11 +70,10 @@ function configurarFormulario() {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-
     const id = document.getElementById("chamadoId").value;
     const chamadoAtual = chamados.find(item => item.id === id);
 
-    const dadosChamado = {
+    const dados = {
       id: id || crypto.randomUUID(),
       protocolo: id ? chamadoAtual.protocolo : gerarProtocolo(),
       solicitante: document.getElementById("solicitante").value.trim(),
@@ -101,15 +86,16 @@ function configurarFormulario() {
     };
 
     if (id) {
-      chamados = chamados.map(item => item.id === id ? dadosChamado : item);
+      chamados = chamados.map(item => item.id === id ? dados : item);
       salvarNoStorage();
       mostrarToast("Chamado atualizado com sucesso!");
       setTimeout(() => window.location.href = "chamados.html", 800);
     } else {
-      chamados.push(dadosChamado);
+      chamados.push(dados);
       salvarNoStorage();
       form.reset();
       mostrarToast("Chamado cadastrado com sucesso!");
+      atualizarDashboard();
     }
   });
 }
@@ -118,57 +104,46 @@ function renderizarTabela() {
   const lista = document.getElementById("listaChamados");
   if (!lista) return;
 
-  const pesquisa = document.getElementById("pesquisa");
-  const mensagemVazia = document.getElementById("mensagemVazia");
-
-  const termo = pesquisa.value.toLowerCase();
-  const filtrados = chamados.filter(chamado =>
-    chamado.protocolo.toLowerCase().includes(termo) ||
-    chamado.solicitante.toLowerCase().includes(termo) ||
-    chamado.setor.toLowerCase().includes(termo) ||
-    chamado.tipo.toLowerCase().includes(termo) ||
-    chamado.status.toLowerCase().includes(termo)
+  const termo = document.getElementById("pesquisa").value.toLowerCase();
+  const filtrados = chamados.filter(c =>
+    c.protocolo.toLowerCase().includes(termo) ||
+    c.solicitante.toLowerCase().includes(termo) ||
+    c.setor.toLowerCase().includes(termo) ||
+    c.tipo.toLowerCase().includes(termo) ||
+    c.status.toLowerCase().includes(termo)
   );
 
   lista.innerHTML = "";
 
-  filtrados.forEach(chamado => {
-    const prioridadeClasse = chamado.prioridade.toLowerCase().replace("é", "e");
-    const linha = document.createElement("tr");
-
-    linha.innerHTML = `
-      <td>${chamado.protocolo}</td>
-      <td>${chamado.solicitante}</td>
-      <td>${chamado.setor}</td>
-      <td>${chamado.tipo}</td>
-      <td><span class="badge ${prioridadeClasse}">${chamado.prioridade}</span></td>
-      <td><span class="status">${chamado.status}</span></td>
+  filtrados.forEach(c => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${c.protocolo}</td>
+      <td>${c.solicitante}</td>
+      <td>${c.setor}</td>
+      <td>${c.tipo}</td>
+      <td><span class="badge ${c.prioridade.toLowerCase().replace("é", "e")}">${c.prioridade}</span></td>
+      <td><span class="status">${c.status}</span></td>
       <td>
-        <a class="btn btn-small btn-edit" href="novo-chamado.html?editar=${chamado.id}">Editar</a>
-        <button class="btn btn-small btn-delete" onclick="excluirChamado('${chamado.id}')">Excluir</button>
-      </td>
-    `;
-
-    lista.appendChild(linha);
+        <a class="btn btn-small btn-edit" href="novo-chamado.html?editar=${c.id}">Editar</a>
+        <button class="btn btn-small btn-delete" onclick="excluirChamado('${c.id}')">Excluir</button>
+      </td>`;
+    lista.appendChild(tr);
   });
 
-  mensagemVazia.style.display = filtrados.length ? "none" : "block";
+  document.getElementById("mensagemVazia").style.display = filtrados.length ? "none" : "block";
 }
 
 function excluirChamado(id) {
-  const confirmar = confirm("Deseja realmente excluir este chamado?");
-  if (!confirmar) return;
-
-  chamados = chamados.filter(chamado => chamado.id !== id);
+  if (!confirm("Deseja realmente excluir este chamado?")) return;
+  chamados = chamados.filter(c => c.id !== id);
   salvarNoStorage();
   renderizarTabela();
 }
 
 function configurarPesquisa() {
   const pesquisa = document.getElementById("pesquisa");
-  if (pesquisa) {
-    pesquisa.addEventListener("input", renderizarTabela);
-  }
+  if (pesquisa) pesquisa.addEventListener("input", renderizarTabela);
 }
 
 verificarLogin();
