@@ -3,55 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard - Sistema de Chamados de TI</title>
+  <title>Login - SupportX</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-<header class="topbar">
-  <div class="header-content">
-    <div class="brand">
-      <h1>Sistema de Chamados de TI</h1>
-      <p>Projeto acadêmico front-end</p>
-    </div>
-    <nav class="menu">
-      <a href="index.html" class="active">Dashboard</a>
-      <a href="novo-chamado.html" class="">Novo Chamado</a>
-      <a href="chamados.html" class="">Lista de Chamados</a>
-      <a href="etapas.html" class="">Etapas</a>
-      <span id="usuarioLogado" class="user-info"></span>
-      <a href="#" id="btnSair" class="btn-logout">Sair</a>
-    </nav>
-  </div>
-</header>
-<main class="container">
-  <section class="hero">
-    <h2>Dashboard do Sistema</h2>
-    <p>Visualize o resumo dos chamados cadastrados, acompanhe os atendimentos abertos, em andamento e finalizados.</p>
-  </section>
+<body class="login-page">
+  <main class="login-card">
+    <div class="login-logo"><span>SX</span></div>
 
-  <section class="cards">
-    <article class="card"><span>Total de chamados</span><strong id="totalChamados">0</strong></article>
-    <article class="card"><span>Chamados abertos</span><strong id="totalAbertos">0</strong></article>
-    <article class="card"><span>Em andamento</span><strong id="totalAndamento">0</strong></article>
-    <article class="card"><span>Finalizados</span><strong id="totalFinalizados">0</strong></article>
-  </section>
+    <h1>SupportX</h1>
+    <p>Sistema de Chamados de TI</p>
 
-  <section class="grid-2">
-    <div class="panel">
-      <h2>Objetivo</h2>
-      <p>O sistema simula uma central de atendimento de TI para registrar, consultar e controlar chamados técnicos.</p>
+    <div class="login-tabs">
+      <button id="tabLogin" class="tab-btn active" type="button">Entrar</button>
+      <button id="tabCadastro" class="tab-btn" type="button">Cadastrar</button>
     </div>
 
-    <div class="panel">
-      <h2>Funcionalidades</h2>
-      <p>Login, cadastro de usuários, cadastro de chamados, edição, exclusão, pesquisa, status e prioridades.</p>
+    <div id="loginAlert" class="login-alert"></div>
+
+    <form id="formLogin" class="form-auth active">
+      <div class="form-group">
+        <label for="loginUsuario">Usuário</label>
+        <input id="loginUsuario" type="text" placeholder="Digite seu usuário" required />
+      </div>
+
+      <div class="form-group password-area">
+        <label for="loginSenha">Senha</label>
+        <input id="loginSenha" type="password" placeholder="Digite sua senha" required />
+        <button class="show-password" type="button" data-target="loginSenha">Mostrar</button>
+      </div>
+
+      <button class="btn btn-primary btn-full" type="submit">Entrar no sistema</button>
+    </form>
+
+    <form id="formCadastro" class="form-auth">
+      <div class="form-group">
+        <label for="cadastroNome">Nome completo</label>
+        <input id="cadastroNome" type="text" placeholder="Ex: Herbert Taylor" required />
+      </div>
+
+      <div class="form-group">
+        <label for="cadastroUsuario">Usuário</label>
+        <input id="cadastroUsuario" type="text" placeholder="Crie um usuário" required />
+      </div>
+
+      <div class="form-group password-area">
+        <label for="cadastroSenha">Senha</label>
+        <input id="cadastroSenha" type="password" placeholder="Mínimo 4 caracteres" required />
+        <button class="show-password" type="button" data-target="cadastroSenha">Mostrar</button>
+      </div>
+
+      <button class="btn btn-primary btn-full" type="submit">Cadastrar usuário</button>
+    </form>
+
+    <div class="login-default">
+      <strong>Usuário inicial:</strong> admin<br />
+      <strong>Senha:</strong> 123456
     </div>
-  </section>
-</main>
-<footer class="footer">
-  <p>Desenvolvido com HTML, CSS, JavaScript e LocalStorage.</p>
-</footer>
-<div id="toast" class="toast"></div>
-<script src="js/script.js"></script>
+  </main>
+
+  <script src="js/auth.js"></script>
 </body>
 </html>
