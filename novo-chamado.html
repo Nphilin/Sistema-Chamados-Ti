@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Novo Chamado - SupportX</title>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 <header class="topbar">
   <div class="header-content">
@@ -13,6 +16,7 @@
       <h1>SupportX</h1>
       <p>Sistema de Chamados de TI</p>
     </div>
+
     <nav class="menu">
       <a href="dashboard.html" class="">Dashboard</a>
       <a href="novo-chamado.html" class="active">Novo Chamado</a>
@@ -23,29 +27,84 @@
     </nav>
   </div>
 </header>
-<main class="container">
-  <section class="hero"><h2 id="tituloFormulario">Novo Chamado</h2><p>Registre uma solicitação de suporte técnico no SupportX.</p></section>
-  <section class="panel">
-    <form id="formChamado">
-      <input type="hidden" id="chamadoId" />
-      <div class="grid-2">
-        <div class="form-group"><label for="solicitante">Solicitante</label><input id="solicitante" type="text" required /></div>
-        <div class="form-group"><label for="setor">Setor</label><input id="setor" type="text" required /></div>
-      </div>
-      <div class="grid-2">
-        <div class="form-group"><label for="tipo">Tipo do problema</label><select id="tipo" required><option value="">Selecione</option><option>Computador</option><option>Internet</option><option>Impressora</option><option>Sistema</option><option>E-mail</option><option>Outro</option></select></div>
-        <div class="form-row">
-          <div class="form-group"><label for="prioridade">Prioridade</label><select id="prioridade"><option>Baixa</option><option>Média</option><option>Alta</option></select></div>
-          <div class="form-group"><label for="status">Status</label><select id="status"><option>Aberto</option><option>Em andamento</option><option>Finalizado</option></select></div>
+
+  <main class="container">
+    <section class="hero">
+      <h2 id="tituloFormulario">Novo Chamado</h2>
+      <p>Registre uma solicitação de suporte técnico no SupportX.</p>
+    </section>
+
+    <section class="panel">
+      <form id="formChamado">
+        <input type="hidden" id="chamadoId" />
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="solicitante">Solicitante</label>
+            <input id="solicitante" type="text" placeholder="Nome do solicitante" required />
+          </div>
+
+          <div class="form-group">
+            <label for="setor">Setor</label>
+            <input id="setor" type="text" placeholder="Ex: Financeiro, RH, TI" required />
+          </div>
         </div>
-      </div>
-      <div class="form-group"><label for="descricao">Descrição</label><textarea id="descricao" rows="5" required></textarea></div>
-      <div class="actions"><button class="btn btn-primary" type="submit">Salvar chamado</button><button class="btn btn-secondary" type="reset">Limpar</button><a class="btn btn-secondary" href="chamados.html">Ver chamados</a></div>
-    </form>
-  </section>
-</main>
-<footer class="footer"><p>SupportX — Sistema de Chamados de TI</p></footer>
-<div id="toast" class="toast"></div>
-<script src="js/script.js"></script>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="tipo">Tipo do problema</label>
+            <select id="tipo" required>
+              <option value="">Selecione</option>
+              <option>Computador</option>
+              <option>Internet</option>
+              <option>Impressora</option>
+              <option>Sistema</option>
+              <option>E-mail</option>
+              <option>Outro</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prioridade">Prioridade</label>
+              <select id="prioridade" required>
+                <option>Baixa</option>
+                <option>Média</option>
+                <option>Alta</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="status">Status</label>
+              <select id="status" required>
+                <option>Aberto</option>
+                <option>Em andamento</option>
+                <option>Finalizado</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" rows="5" placeholder="Descreva o problema informado pelo usuário" required></textarea>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Salvar chamado</button>
+          <button class="btn btn-secondary" type="reset">Limpar</button>
+          <a class="btn btn-secondary" href="chamados.html">Ver chamados</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+
+  <footer class="footer">
+    <p>SupportX — Sistema de Chamados de TI</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

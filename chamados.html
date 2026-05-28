@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Lista de Chamados - SupportX</title>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 <header class="topbar">
   <div class="header-content">
@@ -13,6 +16,7 @@
       <h1>SupportX</h1>
       <p>Sistema de Chamados de TI</p>
     </div>
+
     <nav class="menu">
       <a href="dashboard.html" class="">Dashboard</a>
       <a href="novo-chamado.html" class="">Novo Chamado</a>
@@ -23,16 +27,47 @@
     </nav>
   </div>
 </header>
-<main class="container">
-  <section class="hero"><h2>Lista de Chamados</h2><p>Consulte, pesquise, edite e exclua chamados cadastrados.</p></section>
-  <section class="panel">
-    <div class="table-header"><input id="pesquisa" type="search" placeholder="Pesquisar chamado..." /></div>
-    <div class="table-wrapper"><table><thead><tr><th>Protocolo</th><th>Solicitante</th><th>Setor</th><th>Problema</th><th>Prioridade</th><th>Status</th><th>Ações</th></tr></thead><tbody id="listaChamados"></tbody></table></div>
-    <p id="mensagemVazia" class="empty">Nenhum chamado cadastrado.</p>
-  </section>
-</main>
-<footer class="footer"><p>SupportX — Sistema de Chamados de TI</p></footer>
-<div id="toast" class="toast"></div>
-<script src="js/script.js"></script>
+
+  <main class="container">
+    <section class="hero">
+      <h2>Lista de Chamados</h2>
+      <p>Consulte, pesquise, edite e exclua chamados cadastrados.</p>
+    </section>
+
+    <section class="panel">
+      <div class="table-header">
+        <h2>Chamados cadastrados</h2>
+        <input id="pesquisa" type="search" placeholder="Pesquisar chamado..." />
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Protocolo</th>
+              <th>Solicitante</th>
+              <th>Setor</th>
+              <th>Problema</th>
+              <th>Prioridade</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody id="listaChamados"></tbody>
+        </table>
+      </div>
+
+      <p id="mensagemVazia" class="empty">Nenhum chamado cadastrado.</p>
+    </section>
+  </main>
+
+
+  <footer class="footer">
+    <p>SupportX — Sistema de Chamados de TI</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

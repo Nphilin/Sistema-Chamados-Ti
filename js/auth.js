@@ -1,15 +1,24 @@
 const USERS_KEY = "usuariosTI";
 const SESSION_KEY = "sessaoUsuarioTI";
 
-const usuarioPadrao = { nome: "Administrador", usuario: "admin", senha: "123456" };
+const usuarioPadrao = {
+  nome: "Administrador",
+  usuario: "admin",
+  senha: "123456",
+};
 
 function obterUsuarios() {
   const usuarios = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
-  const existeAdmin = usuarios.some((item) => item.usuario === usuarioPadrao.usuario);
+
+  const existeAdmin = usuarios.some(
+    (item) => item.usuario === usuarioPadrao.usuario
+  );
+
   if (!existeAdmin) {
     usuarios.push(usuarioPadrao);
     localStorage.setItem(USERS_KEY, JSON.stringify(usuarios));
   }
+
   return usuarios;
 }
 
@@ -18,13 +27,16 @@ function salvarUsuarios(usuarios) {
 }
 
 function mostrarAlerta(mensagem, tipo) {
-  const alerta = document.getElementById("loginAlert");
-  alerta.textContent = mensagem;
-  alerta.className = `login-alert ${tipo}`;
-  setTimeout(() => {
-    alerta.className = "login-alert";
-    alerta.textContent = "";
-  }, 3500);
+  const icone = tipo === "success" ? "success" : "error";
+
+  Swal.fire({
+    icon: icone,
+    title: tipo === "success" ? "Sucesso!" : "Atenção!",
+    text: mensagem,
+    confirmButtonColor: "#0d6efd",
+    timer: tipo === "success" ? 1800 : undefined,
+    timerProgressBar: tipo === "success",
+  });
 }
 
 function alternarAba(aba) {
@@ -67,16 +79,25 @@ function realizarLogin(event) {
     return;
   }
 
-  mostrarAlerta("Login realizado com sucesso!", "success");
-
   localStorage.setItem(
     SESSION_KEY,
-    JSON.stringify({ nome: usuarioEncontrado.nome, usuario: usuarioEncontrado.usuario, logado: true })
+    JSON.stringify({
+      nome: usuarioEncontrado.nome,
+      usuario: usuarioEncontrado.usuario,
+      logado: true,
+    })
   );
 
-  setTimeout(() => {
+  Swal.fire({
+    icon: "success",
+    title: "Login realizado!",
+    text: "Bem-vindo ao SupportX.",
+    confirmButtonColor: "#0d6efd",
+    timer: 1600,
+    timerProgressBar: true,
+  }).then(() => {
     window.location.href = "dashboard.html";
-  }, 900);
+  });
 }
 
 function cadastrarUsuario(event) {
@@ -97,6 +118,7 @@ function cadastrarUsuario(event) {
   }
 
   const usuarios = obterUsuarios();
+
   const usuarioExiste = usuarios.some((item) => item.usuario === usuario);
 
   if (usuarioExiste) {
@@ -104,20 +126,34 @@ function cadastrarUsuario(event) {
     return;
   }
 
-  usuarios.push({ nome, usuario, senha });
+  usuarios.push({
+    nome,
+    usuario,
+    senha,
+  });
+
   salvarUsuarios(usuarios);
 
   document.getElementById("formCadastro").reset();
   alternarAba("login");
-  mostrarAlerta("Usuário cadastrado com sucesso!", "success");
+
+  mostrarAlerta("Usuário cadastrado com sucesso. Agora faça login.", "success");
 }
 
 function configurarMostrarSenha() {
-  document.querySelectorAll(".show-password").forEach((botao) => {
+  const botoes = document.querySelectorAll(".show-password");
+
+  botoes.forEach((botao) => {
     botao.addEventListener("click", () => {
       const input = document.getElementById(botao.dataset.target);
-      input.type = input.type === "password" ? "text" : "password";
-      botao.textContent = input.type === "password" ? "Mostrar" : "Ocultar";
+
+      if (input.type === "password") {
+        input.type = "text";
+        botao.textContent = "Ocultar";
+      } else {
+        input.type = "password";
+        botao.textContent = "Mostrar";
+      }
     });
   });
 }
@@ -125,10 +161,23 @@ function configurarMostrarSenha() {
 obterUsuarios();
 
 const sessao = JSON.parse(localStorage.getItem(SESSION_KEY));
-if (sessao && sessao.logado) window.location.href = "dashboard.html";
 
-document.getElementById("tabLogin").addEventListener("click", () => alternarAba("login"));
-document.getElementById("tabCadastro").addEventListener("click", () => alternarAba("cadastro"));
+if (sessao && sessao.logado) {
+  window.location.href = "dashboard.html";
+}
+
+document
+  .getElementById("tabLogin")
+  .addEventListener("click", () => alternarAba("login"));
+
+document
+  .getElementById("tabCadastro")
+  .addEventListener("click", () => alternarAba("cadastro"));
+
 document.getElementById("formLogin").addEventListener("submit", realizarLogin);
-document.getElementById("formCadastro").addEventListener("submit", cadastrarUsuario);
+
+document
+  .getElementById("formCadastro")
+  .addEventListener("submit", cadastrarUsuario);
+
 configurarMostrarSenha();

@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Etapas - SupportX</title>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 <header class="topbar">
   <div class="header-content">
@@ -13,6 +16,7 @@
       <h1>SupportX</h1>
       <p>Sistema de Chamados de TI</p>
     </div>
+
     <nav class="menu">
       <a href="dashboard.html" class="">Dashboard</a>
       <a href="novo-chamado.html" class="">Novo Chamado</a>
@@ -23,18 +27,47 @@
     </nav>
   </div>
 </header>
-<main class="container">
-  <section class="hero"><h2>Etapas do Projeto</h2><p>Organização do desenvolvimento do SupportX.</p></section>
-  <section class="steps">
-    <article class="step"><h3>1. Login</h3><p>Autenticação, cadastro de usuário, sessão e logout.</p></article>
-    <article class="step"><h3>2. Dashboard</h3><p>Indicadores gerais dos chamados.</p></article>
-    <article class="step"><h3>3. Cadastro</h3><p>Registro de solicitações de suporte técnico.</p></article>
-    <article class="step"><h3>4. Listagem</h3><p>Consulta, pesquisa, edição e exclusão.</p></article>
-    <article class="step"><h3>5. LocalStorage</h3><p>Salvamento local de usuários, sessão e chamados.</p></article>
-  </section>
-</main>
-<footer class="footer"><p>SupportX — Sistema de Chamados de TI</p></footer>
-<div id="toast" class="toast"></div>
-<script src="js/script.js"></script>
+
+  <main class="container">
+    <section class="hero">
+      <h2>Etapas do Projeto</h2>
+      <p>Organização do desenvolvimento do SupportX.</p>
+    </section>
+
+    <section class="steps">
+      <article class="step">
+        <h3>1. Login</h3>
+        <p>Autenticação, cadastro de usuário, sessão e logout.</p>
+      </article>
+
+      <article class="step">
+        <h3>2. SweetAlert</h3>
+        <p>Alertas personalizados para login, cadastro, salvamento e exclusão.</p>
+      </article>
+
+      <article class="step">
+        <h3>3. Dashboard</h3>
+        <p>Indicadores gerais dos chamados.</p>
+      </article>
+
+      <article class="step">
+        <h3>4. Cadastro</h3>
+        <p>Registro de solicitações de suporte técnico.</p>
+      </article>
+
+      <article class="step">
+        <h3>5. Deploy</h3>
+        <p>Projeto pronto para publicação no GitHub Pages, Netlify ou Vercel.</p>
+      </article>
+    </section>
+  </main>
+
+
+  <footer class="footer">
+    <p>SupportX — Sistema de Chamados de TI</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

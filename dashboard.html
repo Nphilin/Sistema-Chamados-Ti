@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Dashboard - SupportX</title>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 <header class="topbar">
   <div class="header-content">
@@ -13,6 +16,7 @@
       <h1>SupportX</h1>
       <p>Sistema de Chamados de TI</p>
     </div>
+
     <nav class="menu">
       <a href="dashboard.html" class="active">Dashboard</a>
       <a href="novo-chamado.html" class="">Novo Chamado</a>
@@ -23,24 +27,54 @@
     </nav>
   </div>
 </header>
-<main class="container">
-  <section class="hero">
-    <h2>Dashboard do SupportX</h2>
-    <p>Gerenciamento inteligente de suporte técnico. Visualize chamados cadastrados, abertos, em andamento e finalizados.</p>
-  </section>
-  <section class="cards">
-    <article class="card"><span>Total de chamados</span><strong id="totalChamados">0</strong></article>
-    <article class="card"><span>Chamados abertos</span><strong id="totalAbertos">0</strong></article>
-    <article class="card"><span>Em andamento</span><strong id="totalAndamento">0</strong></article>
-    <article class="card"><span>Finalizados</span><strong id="totalFinalizados">0</strong></article>
-  </section>
-  <section class="grid-2">
-    <div class="panel"><h2>Objetivo</h2><p>Simular uma central moderna de atendimento técnico para registrar, consultar e controlar chamados.</p></div>
-    <div class="panel"><h2>Funcionalidades</h2><p>Login, cadastro de usuários, chamados, edição, exclusão, pesquisa, status e prioridade.</p></div>
-  </section>
-</main>
-<footer class="footer"><p>SupportX — Sistema de Chamados de TI</p></footer>
-<div id="toast" class="toast"></div>
-<script src="js/script.js"></script>
+
+  <main class="container">
+    <section class="hero">
+      <h2>Dashboard do SupportX</h2>
+      <p>Gerenciamento inteligente de suporte técnico. Visualize chamados cadastrados, abertos, em andamento e finalizados.</p>
+    </section>
+
+    <section class="cards">
+      <article class="card">
+        <span>Total de chamados</span>
+        <strong id="totalChamados">0</strong>
+      </article>
+
+      <article class="card">
+        <span>Chamados abertos</span>
+        <strong id="totalAbertos">0</strong>
+      </article>
+
+      <article class="card">
+        <span>Em andamento</span>
+        <strong id="totalAndamento">0</strong>
+      </article>
+
+      <article class="card">
+        <span>Finalizados</span>
+        <strong id="totalFinalizados">0</strong>
+      </article>
+    </section>
+
+    <section class="grid-2">
+      <div class="panel">
+        <h2>Objetivo</h2>
+        <p>Simular uma central moderna de atendimento técnico para registrar, consultar e controlar chamados.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Funcionalidades</h2>
+        <p>Login, cadastro de usuários, SweetAlert, chamados, edição, exclusão, pesquisa, status e prioridade.</p>
+      </div>
+    </section>
+  </main>
+
+
+  <footer class="footer">
+    <p>SupportX — Sistema de Chamados de TI</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

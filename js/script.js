@@ -3,21 +3,41 @@ const STORAGE_KEY = "chamadosTI";
 
 function verificarLogin() {
   const sessao = JSON.parse(localStorage.getItem(SESSION_KEY));
+
   if (!sessao || !sessao.logado) {
     window.location.href = "index.html";
     return;
   }
+
   const usuarioLogado = document.getElementById("usuarioLogado");
-  if (usuarioLogado) usuarioLogado.textContent = `Olá, ${sessao.nome}`;
+
+  if (usuarioLogado) {
+    usuarioLogado.textContent = `Olá, ${sessao.nome}`;
+  }
 }
 
 function configurarLogout() {
   const btnSair = document.getElementById("btnSair");
+
   if (btnSair) {
     btnSair.addEventListener("click", (event) => {
       event.preventDefault();
-      localStorage.removeItem(SESSION_KEY);
-      window.location.href = "index.html";
+
+      Swal.fire({
+        title: "Deseja sair?",
+        text: "Sua sessão será encerrada.",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#0d6efd",
+        cancelButtonColor: "#6c757d",
+        confirmButtonText: "Sim, sair",
+        cancelButtonText: "Cancelar",
+      }).then((resultado) => {
+        if (resultado.isConfirmed) {
+          localStorage.removeItem(SESSION_KEY);
+          window.location.href = "index.html";
+        }
+      });
     });
   }
 }
@@ -29,33 +49,55 @@ function salvarNoStorage() {
 }
 
 function gerarProtocolo() {
-  return `SX-${new Date().getFullYear()}-${Math.floor(Math.random() * 90000) + 10000}`;
+  const ano = new Date().getFullYear();
+  const numero = Math.floor(Math.random() * 90000) + 10000;
+
+  return `SX-${ano}-${numero}`;
 }
 
-function mostrarToast(mensagem) {
-  const toast = document.getElementById("toast");
-  if (!toast) return;
-  toast.textContent = mensagem;
-  toast.style.display = "block";
-  setTimeout(() => (toast.style.display = "none"), 2500);
+function mostrarSucesso(mensagem) {
+  Swal.fire({
+    icon: "success",
+    title: "Sucesso!",
+    text: mensagem,
+    confirmButtonColor: "#0d6efd",
+    timer: 1800,
+    timerProgressBar: true,
+  });
 }
 
 function atualizarDashboard() {
   const total = document.getElementById("totalChamados");
-  if (!total) return;
+
+  if (!total) {
+    return;
+  }
+
   total.textContent = chamados.length;
-  document.getElementById("totalAbertos").textContent = chamados.filter(c => c.status === "Aberto").length;
-  document.getElementById("totalAndamento").textContent = chamados.filter(c => c.status === "Em andamento").length;
-  document.getElementById("totalFinalizados").textContent = chamados.filter(c => c.status === "Finalizado").length;
+
+  document.getElementById("totalAbertos").textContent = chamados.filter(
+    (chamado) => chamado.status === "Aberto"
+  ).length;
+
+  document.getElementById("totalAndamento").textContent = chamados.filter(
+    (chamado) => chamado.status === "Em andamento"
+  ).length;
+
+  document.getElementById("totalFinalizados").textContent = chamados.filter(
+    (chamado) => chamado.status === "Finalizado"
+  ).length;
 }
 
 function configurarFormulario() {
   const form = document.getElementById("formChamado");
-  if (!form) return;
+
+  if (!form) {
+    return;
+  }
 
   const params = new URLSearchParams(window.location.search);
   const idEdicao = params.get("editar");
-  const chamado = chamados.find(item => item.id === idEdicao);
+  const chamado = chamados.find((item) => item.id === idEdicao);
 
   if (chamado) {
     document.getElementById("tituloFormulario").textContent = "Editar Chamado";
@@ -70,8 +112,9 @@ function configurarFormulario() {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+
     const id = document.getElementById("chamadoId").value;
-    const chamadoAtual = chamados.find(item => item.id === id);
+    const chamadoAtual = chamados.find((item) => item.id === id);
 
     const dados = {
       id: id || crypto.randomUUID(),
@@ -82,68 +125,121 @@ function configurarFormulario() {
       prioridade: document.getElementById("prioridade").value,
       status: document.getElementById("status").value,
       descricao: document.getElementById("descricao").value.trim(),
-      dataCriacao: id ? chamadoAtual.dataCriacao : new Date().toLocaleDateString("pt-BR")
+      dataCriacao: id
+        ? chamadoAtual.dataCriacao
+        : new Date().toLocaleDateString("pt-BR"),
     };
 
     if (id) {
-      chamados = chamados.map(item => item.id === id ? dados : item);
+      chamados = chamados.map((item) => (item.id === id ? dados : item));
+
       salvarNoStorage();
-      mostrarToast("Chamado atualizado com sucesso!");
-      setTimeout(() => window.location.href = "chamados.html", 800);
+
+      Swal.fire({
+        icon: "success",
+        title: "Chamado atualizado!",
+        text: "As informações foram salvas com sucesso.",
+        confirmButtonColor: "#0d6efd",
+        timer: 1600,
+        timerProgressBar: true,
+      }).then(() => {
+        window.location.href = "chamados.html";
+      });
     } else {
       chamados.push(dados);
+
       salvarNoStorage();
       form.reset();
-      mostrarToast("Chamado cadastrado com sucesso!");
       atualizarDashboard();
+
+      mostrarSucesso("Chamado cadastrado com sucesso.");
     }
   });
 }
 
 function renderizarTabela() {
   const lista = document.getElementById("listaChamados");
-  if (!lista) return;
+
+  if (!lista) {
+    return;
+  }
 
   const termo = document.getElementById("pesquisa").value.toLowerCase();
-  const filtrados = chamados.filter(c =>
-    c.protocolo.toLowerCase().includes(termo) ||
-    c.solicitante.toLowerCase().includes(termo) ||
-    c.setor.toLowerCase().includes(termo) ||
-    c.tipo.toLowerCase().includes(termo) ||
-    c.status.toLowerCase().includes(termo)
-  );
+
+  const filtrados = chamados.filter((chamado) => {
+    return (
+      chamado.protocolo.toLowerCase().includes(termo) ||
+      chamado.solicitante.toLowerCase().includes(termo) ||
+      chamado.setor.toLowerCase().includes(termo) ||
+      chamado.tipo.toLowerCase().includes(termo) ||
+      chamado.status.toLowerCase().includes(termo)
+    );
+  });
 
   lista.innerHTML = "";
 
-  filtrados.forEach(c => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${c.protocolo}</td>
-      <td>${c.solicitante}</td>
-      <td>${c.setor}</td>
-      <td>${c.tipo}</td>
-      <td><span class="badge ${c.prioridade.toLowerCase().replace("é", "e")}">${c.prioridade}</span></td>
-      <td><span class="status">${c.status}</span></td>
+  filtrados.forEach((chamado) => {
+    const linha = document.createElement("tr");
+    const prioridadeClasse = chamado.prioridade
+      .toLowerCase()
+      .replace("é", "e");
+
+    linha.innerHTML = `
+      <td>${chamado.protocolo}</td>
+      <td>${chamado.solicitante}</td>
+      <td>${chamado.setor}</td>
+      <td>${chamado.tipo}</td>
+      <td><span class="badge ${prioridadeClasse}">${chamado.prioridade}</span></td>
+      <td><span class="status">${chamado.status}</span></td>
       <td>
-        <a class="btn btn-small btn-edit" href="novo-chamado.html?editar=${c.id}">Editar</a>
-        <button class="btn btn-small btn-delete" onclick="excluirChamado('${c.id}')">Excluir</button>
-      </td>`;
-    lista.appendChild(tr);
+        <a class="btn btn-small btn-edit" href="novo-chamado.html?editar=${chamado.id}">Editar</a>
+        <button class="btn btn-small btn-delete" onclick="excluirChamado('${chamado.id}')">Excluir</button>
+      </td>
+    `;
+
+    lista.appendChild(linha);
   });
 
-  document.getElementById("mensagemVazia").style.display = filtrados.length ? "none" : "block";
+  document.getElementById("mensagemVazia").style.display = filtrados.length
+    ? "none"
+    : "block";
 }
 
 function excluirChamado(id) {
-  if (!confirm("Deseja realmente excluir este chamado?")) return;
-  chamados = chamados.filter(c => c.id !== id);
-  salvarNoStorage();
-  renderizarTabela();
+  Swal.fire({
+    title: "Excluir chamado?",
+    text: "Essa ação não poderá ser desfeita.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#dc3545",
+    cancelButtonColor: "#6c757d",
+    confirmButtonText: "Sim, excluir",
+    cancelButtonText: "Cancelar",
+  }).then((resultado) => {
+    if (resultado.isConfirmed) {
+      chamados = chamados.filter((chamado) => chamado.id !== id);
+
+      salvarNoStorage();
+      renderizarTabela();
+
+      Swal.fire({
+        icon: "success",
+        title: "Excluído!",
+        text: "O chamado foi removido com sucesso.",
+        confirmButtonColor: "#0d6efd",
+        timer: 1600,
+        timerProgressBar: true,
+      });
+    }
+  });
 }
 
 function configurarPesquisa() {
   const pesquisa = document.getElementById("pesquisa");
-  if (pesquisa) pesquisa.addEventListener("input", renderizarTabela);
+
+  if (pesquisa) {
+    pesquisa.addEventListener("input", renderizarTabela);
+  }
 }
 
 verificarLogin();

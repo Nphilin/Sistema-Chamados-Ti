@@ -1,68 +1,60 @@
 # SupportX
 
-Sistema de Chamados de TI desenvolvido em front-end e pronto para deploy no GitHub Pages.
+Sistema de Chamados de TI desenvolvido em Front-End, com SweetAlert2 e pronto para deploy.
 
-## Acesso inicial
+## Login inicial
 
 Usuário: `admin`  
 Senha: `123456`
 
-Também é possível cadastrar novos usuários pela tela inicial.
-
-## Estrutura
-
-```txt
-supportx/
-├── index.html          # Login
-├── dashboard.html      # Dashboard
-├── novo-chamado.html   # Cadastro e edição de chamados
-├── chamados.html       # Lista de chamados
-├── etapas.html         # Etapas do projeto
-├── css/
-│   └── style.css
-├── js/
-│   ├── auth.js
-│   └── script.js
-├── README.md
-├── .gitignore
-└── COMMITS_SUGERIDOS.txt
-```
-
-## Tecnologias
+## Tecnologias utilizadas
 
 - HTML5
 - CSS3
 - JavaScript
 - LocalStorage
+- SweetAlert2
 
-## Funcionalidades
+## Desafios solicitados
 
-- Login funcional
-- Cadastro de usuários
-- Sessão simulada com LocalStorage
-- Proteção de páginas internas
-- Logout
-- Cadastro de chamados
-- Edição de chamados
-- Exclusão de chamados
-- Pesquisa dinâmica
-- Dashboard com indicadores
+- Implementação da biblioteca SweetAlert para personalizar os alertas do sistema.
+- Utilização de ferramenta de deploy.
 
-## Como abrir localmente
+## Onde o SweetAlert foi aplicado
+
+- Login realizado com sucesso.
+- Erro de usuário ou senha.
+- Cadastro de usuário.
+- Cadastro de chamado.
+- Edição de chamado.
+- Confirmação de exclusão de chamado.
+- Logout do sistema.
+
+## Deploy
+
+O projeto pode ser publicado em:
+
+- GitHub Pages
+- Netlify
+- Vercel
+
+## Como executar localmente
 
 Abra o arquivo `index.html` no navegador.
 
 ## Como publicar no GitHub Pages
 
-1. Crie um repositório no GitHub.
-2. Envie todos os arquivos do projeto.
-3. Vá em **Settings**.
-4. Clique em **Pages**.
-5. Em **Branch**, selecione `main`.
-6. Em **Folder**, selecione `/root`.
-7. Clique em **Save**.
-8. Aguarde o link do GitHub Pages ser gerado.
+1. Suba os arquivos no GitHub.
+2. Vá em Settings.
+3. Clique em Pages.
+4. Selecione a branch `main`.
+5. Selecione a pasta `/root`.
+6. Clique em Save.
 
-## Observação
+## Commits sugeridos
 
-O projeto usa LocalStorage, então os dados ficam salvos no navegador do usuário.
+```bash
+git add .
+git commit -m "feat: adiciona SweetAlert e prepara deploy"
+git push
+```
