@@ -50,11 +50,3 @@ Abra o arquivo `index.html` no navegador.
 4. Selecione a branch `main`.
 5. Selecione a pasta `/root`.
 6. Clique em Save.
-
-## Commits sugeridos
-
-```bash
-git add .
-git commit -m "feat: adiciona SweetAlert e prepara deploy"
-git push
-```
