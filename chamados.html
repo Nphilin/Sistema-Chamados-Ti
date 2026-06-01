@@ -35,9 +35,27 @@
     </section>
 
     <section class="panel">
-      <div class="table-header">
+      <div class="table-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
         <h2>Chamados cadastrados</h2>
-        <input id="pesquisa" type="search" placeholder="Pesquisar chamado..." />
+        
+        <!-- Melhoria de UX: Barra de ferramentas com filtros rápidos adicionada -->
+        <div class="filter-group" style="display: flex; gap: 10px; flex-grow: 1; justify-content: flex-end; max-width: 600px;">
+          <input id="pesquisa" type="search" placeholder="Pesquisar chamado..." style="flex-grow: 2; min-width: 150px;" />
+          
+          <select id="filtroPrioridade" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; background-color: #fff; color: #333; outline: none; cursor: pointer; font-family: sans-serif;">
+            <option value="">Todas as Prioridades</option>
+            <option value="Baixa">Baixa</option>
+            <option value="Média">Média</option>
+            <option value="Alta">Alta</option>
+          </select>
+
+          <select id="filtroStatus" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; background-color: #fff; color: #333; outline: none; cursor: pointer; font-family: sans-serif;">
+            <option value="">Todos os Status</option>
+            <option value="Aberto">Aberto</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Finalizado">Finalizado</option>
+          </select>
+        </div>
       </div>
 
       <div class="table-wrapper">
@@ -58,10 +76,17 @@
         </table>
       </div>
 
-      <p id="mensagemVazia" class="empty">Nenhum chamado cadastrado.</p>
+      <!-- Melhoria de UX: Estado vazio estilizado com ação rápida -->
+      <div id="mensagemVazia" class="empty" style="text-align: center; padding: 40px 20px;">
+        <div style="font-size: 48px; margin-bottom: 10px;">📋</div>
+        <h3 style="margin: 0 0 10px 0; color: #2196f3; font-family: sans-serif; font-size: 20px;">Nenhum chamado por aqui</h3>
+        <p style="margin: 0 0 20px 0; color: #666; font-family: sans-serif; font-size: 14px;">Parece que todos os problemas de TI já foram resolvidos ou nenhum foi aberto ainda.</p>
+        <a href="novo-chamado.html" style="display: inline-block; background-color: #2196f3; color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: bold; font-family: sans-serif; transition: background 0.2s;">
+          + Abrir Novo Chamado
+        </a>
+      </div>
     </section>
   </main>
-
 
   <footer class="footer">
     <p>SupportX — Sistema de Chamados de TI</p>

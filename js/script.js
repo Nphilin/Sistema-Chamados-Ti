@@ -165,15 +165,24 @@ function renderizarTabela() {
   }
 
   const termo = document.getElementById("pesquisa").value.toLowerCase();
+  
+  // Pegando os valores dos novos selects adicionados no HTML de forma segura
+  const filtroPrioridade = document.getElementById("filtroPrioridade")?.value || "";
+  const filtroStatus = document.getElementById("filtroStatus")?.value || "";
 
+  // Filtra os chamados com base no texto, prioridade e status
   const filtrados = chamados.filter((chamado) => {
-    return (
+    const bateTexto = (
       chamado.protocolo.toLowerCase().includes(termo) ||
       chamado.solicitante.toLowerCase().includes(termo) ||
       chamado.setor.toLowerCase().includes(termo) ||
-      chamado.tipo.toLowerCase().includes(termo) ||
-      chamado.status.toLowerCase().includes(termo)
+      chamado.tipo.toLowerCase().includes(termo)
     );
+
+    const batePrioridade = filtroPrioridade === "" || chamado.prioridade.toLowerCase() === filtroPrioridade.toLowerCase();
+    const bateStatus = filtroStatus === "" || chamado.status.toLowerCase() === filtroStatus.toLowerCase();
+
+    return bateTexto && batePrioridade && bateStatus;
   });
 
   lista.innerHTML = "";
@@ -184,13 +193,16 @@ function renderizarTabela() {
       .toLowerCase()
       .replace("é", "e");
 
+    // Cria classe dinâmica baseada no status atual para estilização (Ex: status-aberto)
+    const statusClasse = "status-badge status-" + chamado.status.toLowerCase().replace(" ", "-");
+
     linha.innerHTML = `
       <td>${chamado.protocolo}</td>
       <td>${chamado.solicitante}</td>
       <td>${chamado.setor}</td>
       <td>${chamado.tipo}</td>
       <td><span class="badge ${prioridadeClasse}">${chamado.prioridade}</span></td>
-      <td><span class="status">${chamado.status}</span></td>
+      <td><span class="${statusClasse}">${chamado.status}</span></td>
       <td>
         <a class="btn btn-small btn-edit" href="novo-chamado.html?editar=${chamado.id}">Editar</a>
         <button class="btn btn-small btn-delete" onclick="excluirChamado('${chamado.id}')">Excluir</button>
@@ -199,6 +211,12 @@ function renderizarTabela() {
 
     lista.appendChild(linha);
   });
+
+  // Atualiza o contador numérico de chamados visíveis na tela
+  const badgeContador = document.getElementById("contadorChamados");
+  if (badgeContador) {
+    badgeContador.textContent = filtrados.length;
+  }
 
   document.getElementById("mensagemVazia").style.display = filtrados.length
     ? "none"
@@ -236,10 +254,13 @@ function excluirChamado(id) {
 
 function configurarPesquisa() {
   const pesquisa = document.getElementById("pesquisa");
+  const filtroPrioridade = document.getElementById("filtroPrioridade");
+  const filtroStatus = document.getElementById("filtroStatus");
 
-  if (pesquisa) {
-    pesquisa.addEventListener("input", renderizarTabela);
-  }
+  // Vincula a renderização da tabela toda vez que o usuário alterar qualquer filtro
+  if (pesquisa) pesquisa.addEventListener("input", renderizarTabela);
+  if (filtroPrioridade) filtroPrioridade.addEventListener("change", renderizarTabela);
+  if (filtroStatus) filtroStatus.addEventListener("change", renderizarTabela);
 }
 
 verificarLogin();
