@@ -1,72 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Login - SupportX</title>
+    <title>Login - SupportX</title>
 
-  <link rel="stylesheet" href="css/style.css" />
-</head>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<body class="login-page">
-  <main class="login-card">
-    <div class="login-logo">
-      <span>SX</span>
-    </div>
-
-    <h1>SupportX</h1>
-    <p>Sistema de Chamados de TI</p>
-
-    <div class="login-tabs">
-      <button id="tabLogin" class="tab-btn active" type="button">Entrar</button>
-      <button id="tabCadastro" class="tab-btn" type="button">Cadastrar</button>
-    </div>
-
-    <div id="loginAlert" class="login-alert"></div>
-
-    <form id="formLogin" class="form-auth active">
-      <div class="form-group">
-        <label for="loginUsuario">Usuário</label>
-        <input id="loginUsuario" type="text" placeholder="Digite seu usuário" required />
+  <body class="login-page">
+    <main class="login-card">
+      <div class="login-logo">
+        <span>SX</span>
       </div>
 
-      <div class="form-group password-area">
-        <label for="loginSenha">Senha</label>
-        <input id="loginSenha" type="password" placeholder="Digite sua senha" required />
-        <button class="show-password" type="button" data-target="loginSenha">Mostrar</button>
+      <h1>SupportX</h1>
+      <p>Sistema de Chamados de TI</p>
+
+      <div class="login-tabs">
+        <button id="tabLogin" class="tab-btn active" type="button">
+          Entrar
+        </button>
+        <button id="tabCadastro" class="tab-btn" type="button">
+          Cadastrar
+        </button>
       </div>
 
-      <button class="btn btn-primary btn-full" type="submit">Entrar no sistema</button>
-    </form>
+      <div id="loginAlert" class="login-alert"></div>
 
-    <form id="formCadastro" class="form-auth">
-      <div class="form-group">
-        <label for="cadastroNome">Nome completo</label>
-        <input id="cadastroNome" type="text" placeholder="Ex: Herbert Taylor" required />
+      <form id="formLogin" class="form-auth active">
+        <div class="form-group">
+          <label for="loginUsuario">Usuário</label>
+          <input
+            id="loginUsuario"
+            type="text"
+            placeholder="Digite seu usuário"
+            required
+          />
+        </div>
+
+        <div class="form-group password-area">
+          <label for="loginSenha">Senha</label>
+          <input
+            id="loginSenha"
+            type="password"
+            placeholder="Digite sua senha"
+            required
+          />
+          <button class="show-password" type="button" data-target="loginSenha">
+            Mostrar
+          </button>
+        </div>
+
+        <button class="btn btn-primary btn-full" type="submit">
+          Entrar no sistema
+        </button>
+      </form>
+
+      <form id="formCadastro" class="form-auth">
+        <div class="form-group">
+          <label for="cadastroNome">Nome completo</label>
+          <input
+            id="cadastroNome"
+            type="text"
+            placeholder="Ex: Seu nome completo"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="cadastroUsuario">Usuário</label>
+          <input
+            id="cadastroUsuario"
+            type="text"
+            placeholder="Crie um usuário"
+            required
+          />
+        </div>
+
+        <div class="form-group password-area">
+          <label for="cadastroSenha">Senha</label>
+          <input
+            id="cadastroSenha"
+            type="password"
+            placeholder="Mínimo 4 caracteres"
+            required
+          />
+          <button
+            class="show-password"
+            type="button"
+            data-target="cadastroSenha"
+          >
+            Mostrar
+          </button>
+        </div>
+
+        <button class="btn btn-primary btn-full" type="submit">
+          Cadastrar usuário
+        </button>
+      </form>
+
+      <div class="login-default">
+        <strong>Usuário inicial:</strong> admin<br />
+        <strong>Senha:</strong> 123456
       </div>
+    </main>
 
-      <div class="form-group">
-        <label for="cadastroUsuario">Usuário</label>
-        <input id="cadastroUsuario" type="text" placeholder="Crie um usuário" required />
-      </div>
-
-      <div class="form-group password-area">
-        <label for="cadastroSenha">Senha</label>
-        <input id="cadastroSenha" type="password" placeholder="Mínimo 4 caracteres" required />
-        <button class="show-password" type="button" data-target="cadastroSenha">Mostrar</button>
-      </div>
-
-      <button class="btn btn-primary btn-full" type="submit">Cadastrar usuário</button>
-    </form>
-
-    <div class="login-default">
-      <strong>Usuário inicial:</strong> admin<br />
-      <strong>Senha:</strong> 123456
-    </div>
-  </main>
-
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="js/auth.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/auth.js"></script>
+  </body>
 </html>

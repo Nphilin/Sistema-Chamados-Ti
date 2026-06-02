@@ -11,7 +11,7 @@ function obterUsuarios() {
   const usuarios = JSON.parse(localStorage.getItem(USERS_KEY)) || [];
 
   const existeAdmin = usuarios.some(
-    (item) => item.usuario === usuarioPadrao.usuario
+    (item) => item.usuario === usuarioPadrao.usuario,
   );
 
   if (!existeAdmin) {
@@ -71,7 +71,7 @@ function realizarLogin(event) {
   }
 
   const usuarioEncontrado = usuarios.find(
-    (item) => item.usuario === usuario && item.senha === senha
+    (item) => item.usuario === usuario && item.senha === senha,
   );
 
   if (!usuarioEncontrado) {
@@ -85,7 +85,7 @@ function realizarLogin(event) {
       nome: usuarioEncontrado.nome,
       usuario: usuarioEncontrado.usuario,
       logado: true,
-    })
+    }),
   );
 
   Swal.fire({
