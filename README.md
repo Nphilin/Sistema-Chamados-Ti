@@ -48,5 +48,5 @@ Abra o arquivo `index.html` no navegador.
 2. Vá em Settings.
 3. Clique em Pages.
 4. Selecione a branch `main`.
-5. Selecione a pasta `/root`.
+5. Selecione a pasta / (root).
 6. Clique em Save.

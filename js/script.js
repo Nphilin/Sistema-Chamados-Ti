@@ -76,15 +76,15 @@ function atualizarDashboard() {
   total.textContent = chamados.length;
 
   document.getElementById("totalAbertos").textContent = chamados.filter(
-    (chamado) => chamado.status === "Aberto"
+    (chamado) => chamado.status === "Aberto",
   ).length;
 
   document.getElementById("totalAndamento").textContent = chamados.filter(
-    (chamado) => chamado.status === "Em andamento"
+    (chamado) => chamado.status === "Em andamento",
   ).length;
 
   document.getElementById("totalFinalizados").textContent = chamados.filter(
-    (chamado) => chamado.status === "Finalizado"
+    (chamado) => chamado.status === "Finalizado",
   ).length;
 }
 
@@ -165,22 +165,26 @@ function renderizarTabela() {
   }
 
   const termo = document.getElementById("pesquisa").value.toLowerCase();
-  
+
   // Pegando os valores dos novos selects adicionados no HTML de forma segura
-  const filtroPrioridade = document.getElementById("filtroPrioridade")?.value || "";
+  const filtroPrioridade =
+    document.getElementById("filtroPrioridade")?.value || "";
   const filtroStatus = document.getElementById("filtroStatus")?.value || "";
 
   // Filtra os chamados com base no texto, prioridade e status
   const filtrados = chamados.filter((chamado) => {
-    const bateTexto = (
+    const bateTexto =
       chamado.protocolo.toLowerCase().includes(termo) ||
       chamado.solicitante.toLowerCase().includes(termo) ||
       chamado.setor.toLowerCase().includes(termo) ||
-      chamado.tipo.toLowerCase().includes(termo)
-    );
+      chamado.tipo.toLowerCase().includes(termo);
 
-    const batePrioridade = filtroPrioridade === "" || chamado.prioridade.toLowerCase() === filtroPrioridade.toLowerCase();
-    const bateStatus = filtroStatus === "" || chamado.status.toLowerCase() === filtroStatus.toLowerCase();
+    const batePrioridade =
+      filtroPrioridade === "" ||
+      chamado.prioridade.toLowerCase() === filtroPrioridade.toLowerCase();
+    const bateStatus =
+      filtroStatus === "" ||
+      chamado.status.toLowerCase() === filtroStatus.toLowerCase();
 
     return bateTexto && batePrioridade && bateStatus;
   });
@@ -189,12 +193,11 @@ function renderizarTabela() {
 
   filtrados.forEach((chamado) => {
     const linha = document.createElement("tr");
-    const prioridadeClasse = chamado.prioridade
-      .toLowerCase()
-      .replace("é", "e");
+    const prioridadeClasse = chamado.prioridade.toLowerCase().replace("é", "e");
 
     // Cria classe dinâmica baseada no status atual para estilização (Ex: status-aberto)
-    const statusClasse = "status-badge status-" + chamado.status.toLowerCase().replace(" ", "-");
+    const statusClasse =
+      "status-badge status-" + chamado.status.toLowerCase().replace(" ", "-");
 
     linha.innerHTML = `
       <td>${chamado.protocolo}</td>
@@ -259,7 +262,8 @@ function configurarPesquisa() {
 
   // Vincula a renderização da tabela toda vez que o usuário alterar qualquer filtro
   if (pesquisa) pesquisa.addEventListener("input", renderizarTabela);
-  if (filtroPrioridade) filtroPrioridade.addEventListener("change", renderizarTabela);
+  if (filtroPrioridade)
+    filtroPrioridade.addEventListener("change", renderizarTabela);
   if (filtroStatus) filtroStatus.addEventListener("change", renderizarTabela);
 }
 
